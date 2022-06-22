@@ -10,33 +10,26 @@ const InitialData = [
 ]
 
 export default function ItemScreen() {
-    const [items, setItems] = useState(InitialData)
+    let map: Map<number, any> = new Map()
+    for (let item of InitialData) {
+        map.set(item.id, item)
+    }
+    const [items, setItems] = useState(map)
 
     function handleCountClick(id: number, count: number) {
         if (count < 0) {
-            alert("Count can't be less than 0!")
-            return
+            alert('Not Allowed')
+            return;
         }
-
-        let tempData = [...items]
-        tempData[id - 1] = {...tempData[id - 1], count}
-        setItems(tempData)
+        let testMap = new Map(items)
+        let item = testMap.get(id)
+        item.count = count
+        setItems(testMap)
     }
     return (
         <div>
-            {items.map((i) => {
-                return (
-                    <Item
-                        key={i.id}
-                        data={{
-                            id: i.id,
-                            name: i.name,
-                            price: i.price,
-                            count: i.count,
-                            handleCountClick,
-                        }}
-                    />
-                )
+            {[...items.values()].map((currentItem, index) => {
+                return <Item key={index} item={currentItem} handleCountClick={handleCountClick} />
             })}
         </div>
     )

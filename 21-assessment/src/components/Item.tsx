@@ -1,27 +1,13 @@
-interface ItemProp {
-    data: {
-        id: number
-        name: string
-        price: number
-        count: number
-        handleCountClick: (id: number, count: number) => any
-    }
-}
-
-export default function Item(prop: ItemProp) {
-    const { data } = prop
+export default function Item(props: any) {
+    const { item, handleCountClick } = props
     return (
         <div>
-            <h1>{data.name}</h1>
-            <p>{`Count: ${data.count}`}</p>
-            <p>{`Final Price: ${data.price * data.count}`}</p>
+            <h1>{item.name}</h1>
+            <p>{`Count: ${item.count}`}</p>
+            <p>{`Final Price: ${item.price * item.count}`}</p>
             <div>
-                <button onClick={() => data.handleCountClick(data.id, data.count + 1)}>
-                    Increase
-                </button>
-                <button onClick={() => data.handleCountClick(data.id, data.count - 1)}>
-                    Decrease
-                </button>
+                <button onClick={() => handleCountClick(item.id, item.count + 1)}>Increase</button>
+                <button onClick={() => handleCountClick(item.id, item.count - 1)}>Decrease</button>
             </div>
         </div>
     )
