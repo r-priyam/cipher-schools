@@ -1,0 +1,20 @@
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+.item {
+    flex: 1 0 21%;
+    background: teal;
+    color: white;
+    padding: 20px;
+    margin: 10px;
+    width: 50px;
+    height: 60px;
+}
+  
+* {
+    background: black;
+    box-sizing: border-box;
+}
